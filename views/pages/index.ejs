@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/modules.css">
+
     <title>Document</title>
 </head>
+
 <body>
-    <p>I exist for tamales!</p>
-    
+    <form action="/search" method="POST">
+        <label>Search: 
+        <input type="text" name="search">
+      </label>
+        <label> By Author
+        <input type="radio" name="author">
+      </label>
+        <label> By Title
+        <input type="radio" name="title">
+      </label>
+        <button type="submit">Submit</button>
+    </form>
+
 </body>
+
 </html>
