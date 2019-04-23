@@ -1,0 +1,19 @@
+{
+  "name": "lab_11_bp_ms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rebecca-pete/Lab_11_BP_MS.git"
+  },
+  "author": "Becky and Morgana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rebecca-pete/Lab_11_BP_MS/issues"
+  },
+  "homepage": "https://github.com/rebecca-pete/Lab_11_BP_MS#readme"
+}
