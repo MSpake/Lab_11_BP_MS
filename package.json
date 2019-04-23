@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/rebecca-pete/Lab_11_BP_MS/issues"
   },
-  "homepage": "https://github.com/rebecca-pete/Lab_11_BP_MS#readme"
+  "homepage": "https://github.com/rebecca-pete/Lab_11_BP_MS#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "pg": "^7.10.0",
+    "superagent": "^5.0.2"
+  }
 }
