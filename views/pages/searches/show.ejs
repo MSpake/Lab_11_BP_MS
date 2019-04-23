@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="styles/reset.css">
+<link rel="stylesheet" href="styles/modules.css">
+
+
+<head>
+
+</head>
+
+<body>
+    <h1>Results</h1>
+    <p><a href="/">Home</a></p>
+
+
+    <ul>
+        <% bookArray.forEach(showBook => { %>
+            <h2> Title:
+                <%= showBook.title %>
+            </h2>
+            <li> Author:
+                <%= showBook.authors %>
+            </li>
+            <li> Description:
+                <%= showBook.description %>
+            </li>
+            <li> Image url:
+                <%= showBook.photo %>
+            </li>
+            <% }) %>
+    </ul>
+</body>
+
+</html>
