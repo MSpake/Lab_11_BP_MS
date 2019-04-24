@@ -12,17 +12,20 @@
 
 <body>
     <p><a href="/new_search">New Search</a></p>
-
+    <h4>
+        <%= savedBooksArr.length %> Saved Books</h4>
     <main>
         <% savedBooksArr.forEach(showBook => { %>
-            <img src="<%= showBook.photo %>" alt="">
-            <h2> Title:
-                <%= showBook.title %>
-            </h2>
-            <p> Author:
-                <%= showBook.authors %>
-            </p>
-            <a href="#"><button>View Details</button></a>
+            <section>
+                <img src="<%= showBook.image_url %>" alt="">
+                <h2>
+                    <%= showBook.title %>
+                </h2>
+                <p>
+                    <%= showBook.author %>
+                </p>
+                <a href="#"><button>View Details</button></a>
+            </section>
             <% }) %>
     </main>
 </body>
