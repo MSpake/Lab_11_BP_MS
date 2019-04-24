@@ -23,6 +23,7 @@ client.connect();
 
 const SQL = {};
 SQL.getAll = 'SELECT * FROM saved_books;';
+SQL.getById = 'SELECT * FROM saved_books WHERE id=$1;';
 
 //===============================
 // Constructor
@@ -50,6 +51,13 @@ app.get('/', (request, response) => {
     response.render('pages/index.ejs', { savedBooksArr: result.rows });
   }).catch(error => handleError(error, response));
 });
+
+app.get('/books/:id', (request, response) => {
+  const selected = parseInt(request.params.id);
+  client.query(SQL.getById, [selected]).then(result => {
+    response.render('pages/books/detail.ejs', {showBook: result.rows[0]});
+  })
+})
 
 //render this form at this route
 app.get('/new_search', (request, response) => {
