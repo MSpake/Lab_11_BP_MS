@@ -11,19 +11,20 @@
 </head>
 
 <body>
-    <form action="/searches" method="POST">
-        <label>Search: 
-        <input type="text" name="search">
-      </label>
-        <label> By Author
-        <input type="radio" name="author">
-      </label>
-        <label> By Title
-        <input type="radio" name="title">
-      </label>
-        <button type="submit">Submit</button>
-    </form>
+    <p><a href="/new_search">New Search</a></p>
 
+    <main>
+        <% savedBooksArr.forEach(showBook => { %>
+            <img src="<%= showBook.photo %>" alt="">
+            <h2> Title:
+                <%= showBook.title %>
+            </h2>
+            <p> Author:
+                <%= showBook.authors %>
+            </p>
+            <a href="#"><button>View Details</button></a>
+            <% }) %>
+    </main>
 </body>
 
 </html>
