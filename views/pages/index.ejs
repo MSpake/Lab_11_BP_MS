@@ -16,16 +16,7 @@
         <%= savedBooksArr.length %> Saved Books</h4>
     <main>
         <% savedBooksArr.forEach(showBook => { %>
-            <section>
-                <img src="<%= showBook.image_url %>" alt="">
-                <h2>
-                    <%= showBook.title %>
-                </h2>
-                <p>
-                    <%= showBook.author %>
-                </p>
-                <a href="#"><button>View Details</button></a>
-            </section>
+            <%- include('../layout/book.ejs', {showBook}) %>
             <% }) %>
     </main>
 </body>

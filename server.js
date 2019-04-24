@@ -45,7 +45,7 @@ function handleError (error, response) {
 
 //render homepage on load, at this route
 app.get('/', (request, response) => {
-  client.query('SELECT * FROM doessdf').then(result => {
+  client.query(SQL.getAll).then(result => {
     //first parameter indicates where content will be rendered, second parameter indicates retrived data from table.
     response.render('pages/index.ejs', { savedBooksArr: result.rows });
   }).catch(error => handleError(error, response));
