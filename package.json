@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/rebecca-pete/Lab_11_BP_MS#readme",
   "dependencies": {
+    "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "pg": "^7.10.0",

@@ -1,14 +1,28 @@
 'use strict';
 
+require('dotenv').config();
+
 const PORT = process.env.PORT || 3000;
 
 const express = require('express');
 const superagent = require('superagent');
+const pg = require('pg');
 
 const app = express();
 app.use(express.static('./public')); //for the purposes of our site, public is the root folder
 app.use(express.urlencoded({ extended: true }));
 app.set('view-engine', 'ejs');
+
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', error => console.error(error));
+client.connect();
+
+//===============================
+// SQL
+//===============================
+
+const SQL = {};
+SQL.getAll = 'SELECT * FROM saved_books;';
 
 //===============================
 // Constructor
@@ -28,8 +42,17 @@ function Book(book) {
 //  new Book(result.body.items[0])
 // })
 
+//render homepage on load, at this route
 app.get('/', (request, response) => {
-  response.render('pages/index.ejs');
+  client.query(SQL.getAll).then(result => {
+    //first parameter indicates where content will be rendered, second parameter indicates retrived data from table.
+    response.render('pages/index.ejs', { savedBooksArr: result.rows });
+  });
+});
+
+//render this form at this route
+app.get('/new_search', (request, response) => {
+  response.render('pages/searches/new.ejs');
 });
 
 app.post('/searches', (request, response) => {

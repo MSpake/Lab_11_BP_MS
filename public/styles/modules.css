@@ -8,3 +8,7 @@ h2 {
 li {
     padding: 5px 30px;
 }
+
+section {
+    border: 2px solid red;
+}
