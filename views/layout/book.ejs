@@ -1,0 +1,23 @@
+
+    <section>
+        <img src="<%= showBook.image_url %>" alt="">
+        <h2>
+            <%= showBook.title %>
+        </h2>
+        <p>
+            <%= showBook.author %>
+        </p>
+        <p>
+            <%= showBook.description %>
+        </p>
+        <p>ISBN: 
+            <%= showBook.isbn %>
+        </p>
+        <!-- <p>Bookshelf: 
+            <$= showBook.bookshelf %>
+        </p> -->
+        <% if (!showBook.isbn) { %>
+
+            <a href="/books/<%=showBook.id%>"><button>View Details</button></a>
+        <% } %> 
+    </section>
