@@ -38,16 +38,17 @@ function Book(book) {
 //===============================
 //===============================
 
-//superagent.get(url).then( result => {
-//  new Book(result.body.items[0])
-// })
+function handleError (error, response) {
+  response.render('pages/error.ejs', {status:500, message:'Something has gone wrong!'});
+  console.log('Ooops.');
+}
 
 //render homepage on load, at this route
 app.get('/', (request, response) => {
-  client.query(SQL.getAll).then(result => {
+  client.query('SELECT * FROM doessdf').then(result => {
     //first parameter indicates where content will be rendered, second parameter indicates retrived data from table.
     response.render('pages/index.ejs', { savedBooksArr: result.rows });
-  });
+  }).catch(error => handleError(error, response));
 });
 
 //render this form at this route
@@ -69,7 +70,7 @@ app.post('/searches', (request, response) => {
     });
     response.render('pages/searches/show.ejs', { bookArray: bookArray });
     // response.send(bookArray);
-  });
+  }).catch(error => handleError(error, response));
 });
 
 // below test renders page
