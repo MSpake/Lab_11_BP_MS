@@ -1,12 +1,17 @@
 <%- include('../../layout/head.ejs')%>
 
 <body>
+    <%- include('../../layout/header.ejs')%>
     <h1>Results</h1>
-    <p><a href="/">Home</a></p>
-
     <main>
         <% bookArray.forEach(showBook => { %>
             <%- include('../../layout/book.ejs', {showBook}) %>
+            <form action="/save_to_library" method="POST">
+                <label>Bookshelf: 
+                <%- include('../../layout/formInputs.ejs', {showBook})%>
+                    
+                </label>
+            </form>
             <% }) %>
     </main>
 </body>
