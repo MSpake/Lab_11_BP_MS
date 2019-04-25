@@ -49,6 +49,8 @@ const SQL = {};
 SQL.getAll = 'SELECT * FROM saved_books;';
 SQL.getById = 'SELECT * FROM saved_books WHERE id=$1;';
 SQL.saveBookToDatabase = 'INSERT INTO saved_books (title, author, description, image_url, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+//this command grabs the last single saved entry from the table
+SQL.getLast = 'SELECT * FROM saved_books ORDER BY id DESC LIMIT 1;';
 
 //===============================
 // Constructor
@@ -109,8 +111,13 @@ function bookSearch(request, response) {
 
 function saveToLibrary(request, response) {
   const { title, author, description, image_url, isbn, bookshelf } = request.body;
-  client.query(SQL.saveBookToDatabase, [title, author, description, image_url, isbn, bookshelf]).catch(error => handleError(error, response));
-  response.redirect('/');
+  //saves the selected book information to the database
+  client.query(SQL.saveBookToDatabase, [title, author, description, image_url, isbn, bookshelf]).then(result => {
+    client.query(SQL.getLast).then(result => {
+      const id = result.rows[0].id;
+      response.redirect(`/books/${id}`);
+    })
+  }).catch(error => handleError(error, response));
 }
 
 //===============================
