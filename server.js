@@ -48,6 +48,7 @@ app.get('/test', (request, response) => {
 const SQL = {};
 SQL.getAll = 'SELECT * FROM saved_books;';
 SQL.getById = 'SELECT * FROM saved_books WHERE id=$1;';
+SQL.saveBookToDatabase = 'INSERT INTO saved_books (title, author, description, image_url, isbn, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
 
 //===============================
 // Constructor
@@ -58,7 +59,7 @@ function Book(book) {
   this.author = book.volumeInfo.authors || 'Could not find Author';
   this.description = book.volumeInfo.description || 'No description given.';
   this.image_url = book.volumeInfo.imageLinks ? (book.volumeInfo.imageLinks.thumbnail.substring(0, 4) + 's' + book.volumeInfo.imageLinks.thumbnail.slice(4, book.volumeInfo.imageLinks.thumbnail.length)) : 'Doesnotexist.jpg';
-  this.isbn = book.volumeInfo.isbn || 'Could not find ISBN';
+  this.isbn = book.volumeInfo.industryIdentifiers[0].identifier || 'Could not find ISBN';
   this.bookshelf;
 }
 
@@ -82,7 +83,7 @@ function renderDetailView(request, response) {
   const selected = parseInt(request.params.id);
   client.query(SQL.getById, [selected]).then(result => {
     response.render('pages/books/detail.ejs', { showBook: result.rows[0] });
-  })
+  }).catch(error => handleError(error, response))
 }
 
 function searchForm(request, response) {
@@ -107,9 +108,9 @@ function bookSearch(request, response) {
 }
 
 function saveToLibrary(request, response) {
-  const { title, author, description, isbn, image_url, bookshelf } = request.body;
-
-  // response.
+  const { title, author, description, image_url, isbn, bookshelf } = request.body;
+  client.query(SQL.saveBookToDatabase, [title, author, description, image_url, isbn, bookshelf]).catch(error => handleError(error, response));
+  response.redirect('/');
 }
 
 //===============================

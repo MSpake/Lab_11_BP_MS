@@ -10,6 +10,6 @@ CREATE TABLE saved_books (
   bookshelf VARCHAR(255)
 );
 
-INSERT INTO saved_books (title, author, description, image_url, isbn, bookshelf) VALUES ('I am a Book', 'Anon', 'Best book ever', 'https://about.canva.com/wp-content/uploads/sites/3/2015/01/children_bookcover.png', '1234567891234', 'Coool Boooks');
+-- INSERT INTO saved_books (title, author, description, image_url, isbn, bookshelf) VALUES ('I am a Book', 'Anon', 'Best book ever', 'https://about.canva.com/wp-content/uploads/sites/3/2015/01/children_bookcover.png', '1234567891234', 'Coool Boooks');
 
-INSERT INTO saved_books (title, author, description, image_url, isbn, bookshelf) VALUES ('I am a Book', 'Anon', 'Best book ever', 'https://about.canva.com/wp-content/uploads/sites/3/2015/01/children_bookcover.png', '1234567891234', 'Coool Boooks');
+-- INSERT INTO saved_books (title, author, description, image_url, isbn, bookshelf) VALUES ('I am a Book', 'Anon', 'Best book ever', 'https://about.canva.com/wp-content/uploads/sites/3/2015/01/children_bookcover.png', '1234567891234', 'Coool Boooks');
