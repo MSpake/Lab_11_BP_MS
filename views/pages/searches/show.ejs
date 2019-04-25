@@ -1,34 +1,14 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="styles/reset.css">
-<link rel="stylesheet" href="styles/modules.css">
-
-
-<head>
-
-</head>
+<%- include('../../layout/head.ejs')%>
 
 <body>
     <h1>Results</h1>
     <p><a href="/">Home</a></p>
 
-
-    <ul>
+    <main>
         <% bookArray.forEach(showBook => { %>
-            <h2> Title:
-                <%= showBook.title %>
-            </h2>
-            <li> Author:
-                <%= showBook.authors %>
-            </li>
-            <li> Description:
-                <%= showBook.description %>
-            </li>
-            <li> Image url:
-                <%= showBook.photo %>
-            </li>
+            <%- include('../../layout/book.ejs', {showBook}) %>
             <% }) %>
-    </ul>
+    </main>
 </body>
 
 </html>

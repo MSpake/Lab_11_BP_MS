@@ -52,9 +52,11 @@ SQL.getById = 'SELECT * FROM saved_books WHERE id=$1;';
 
 function Book(book) {
   this.title = book.volumeInfo.title || 'Title not found';
-  this.authors = book.volumeInfo.authors || 'Could not find Author';
+  this.author = book.volumeInfo.authors || 'Could not find Author';
   this.description = book.volumeInfo.description || 'No description given.';
-  this.photo = (book.volumeInfo.imageLinks.thumbnail.substring(0, 4) + 's' + book.volumeInfo.imageLinks.thumbnail.slice(4, book.volumeInfo.imageLinks.thumbnail.length));
+  this.image_url = book.volumeInfo.imageLinks ? (book.volumeInfo.imageLinks.thumbnail.substring(0, 4) + 's' + book.volumeInfo.imageLinks.thumbnail.slice(4, book.volumeInfo.imageLinks.thumbnail.length)) : 'Doesnotexist.jpg';
+  this.isbn = book.volumeInfo.isbn || 'Could not find ISBN';
+  this.bookshelf;
 }
 
 //===============================
@@ -63,7 +65,7 @@ function Book(book) {
 
 function handleError (error, response) {
   response.render('pages/error.ejs', {status:500, message:'Something has gone wrong!'});
-  console.log('Ooops.');
+  console.log(error);
 }
 
 function renderHomepage (request, response) {
