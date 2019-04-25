@@ -1,20 +1,20 @@
 <%- include('../layout/head.ejs')%>
-<body>
-    <%- include('../layout/header.ejs')%>
-    <p><a href="/new_search">New Search</a></p>
-    <h4>
-        <%= savedBooksArr.length %> Saved Books</h4>
-    <main>
-        <% savedBooksArr.forEach(showBook => { %>
-            <% showBook = {
+
+    <body>
+        <%- include('../layout/header.ejs')%>
+            <h4>
+                <%= savedBooksArr.length %> Saved Books</h4>
+            <main>
+                <% savedBooksArr.forEach(showBook => { %>
+                    <% showBook = {
                 id: showBook.id,
                 title: showBook.title,
                 author: showBook.author,
                 image_url: showBook.image_url
             } %>
-            <%- include('../layout/book.ejs', {showBook}) %>
-            <% }) %>
-    </main>
-</body>
+                        <%- include('../layout/book.ejs', {showBook}) %>
+                            <% }) %>
+            </main>
+    </body>
 
-</html>
+    </html>
