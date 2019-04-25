@@ -18,6 +18,27 @@ client.on('error', error => console.error(error));
 client.connect();
 
 //===============================
+// Routes
+//===============================
+
+//render homepage on load, at this route
+app.get('/', renderHomepage);
+
+//renders detail view
+app.get('/books/:id', renderDetailView);
+
+//render this form at this route
+app.get('/new_search', searchForm);
+
+//search results from API
+app.post('/searches', bookSearch);
+
+// below test renders page
+app.get('/test', (request, response) => {
+  response.render('pages/index.ejs');
+});
+
+//===============================
 // SQL
 //===============================
 
@@ -31,40 +52,41 @@ SQL.getById = 'SELECT * FROM saved_books WHERE id=$1;';
 
 function Book(book) {
   this.title = book.volumeInfo.title || 'Title not found';
-  this.authors = book.volumeInfo.authors || 'Could not find Author';
+  this.author = book.volumeInfo.authors || 'Could not find Author';
   this.description = book.volumeInfo.description || 'No description given.';
-  this.photo = (book.volumeInfo.imageLinks.thumbnail.substring(0, 4) + 's' + book.volumeInfo.imageLinks.thumbnail.slice(4, book.volumeInfo.imageLinks.thumbnail.length));
+  this.image_url = book.volumeInfo.imageLinks ? (book.volumeInfo.imageLinks.thumbnail.substring(0, 4) + 's' + book.volumeInfo.imageLinks.thumbnail.slice(4, book.volumeInfo.imageLinks.thumbnail.length)) : 'Doesnotexist.jpg';
+  this.isbn = book.volumeInfo.isbn || 'Could not find ISBN';
+  this.bookshelf;
 }
 
 //===============================
+// Helper Functions
 //===============================
 
 function handleError (error, response) {
   response.render('pages/error.ejs', {status:500, message:'Something has gone wrong!'});
-  console.log('Ooops.');
+  console.log(error);
 }
 
-//render homepage on load, at this route
-app.get('/', (request, response) => {
+function renderHomepage (request, response) {
   client.query(SQL.getAll).then(result => {
     //first parameter indicates where content will be rendered, second parameter indicates retrived data from table.
     response.render('pages/index.ejs', { savedBooksArr: result.rows });
   }).catch(error => handleError(error, response));
-});
+}
 
-app.get('/books/:id', (request, response) => {
+function renderDetailView (request, response) {
   const selected = parseInt(request.params.id);
   client.query(SQL.getById, [selected]).then(result => {
     response.render('pages/books/detail.ejs', {showBook: result.rows[0]});
   })
-})
+}
 
-//render this form at this route
-app.get('/new_search', (request, response) => {
+function searchForm (request, response) {
   response.render('pages/searches/new.ejs');
-});
+}
 
-app.post('/searches', (request, response) => {
+function bookSearch (request, response) {
   const query = request.body.search;
   console.log(query);
   const url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
@@ -79,12 +101,7 @@ app.post('/searches', (request, response) => {
     response.render('pages/searches/show.ejs', { bookArray: bookArray });
     // response.send(bookArray);
   }).catch(error => handleError(error, response));
-});
-
-// below test renders page
-app.get('/test', (request, response) => {
-  response.render('pages/index.ejs');
-});
+}
 
 //===============================
 
