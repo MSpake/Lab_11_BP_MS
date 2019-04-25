@@ -1,7 +1,7 @@
 # Lab 11 - Bookshelf  
   
 **Author**: Becky and Morgana  
-**Version**: 1.2.0  
+**Version**: 1.3.0  
   
 ## Overview  
   
@@ -25,7 +25,12 @@ Bookshelf app that allows the user to search for books by title or author.
 4/24/2019 1:00pm - Book partial created and rendering.  
 4/24/2019 1:15pm - Details view added.  
 4/24/2019 1:30pm - View Details button issue solved.          
-<!-- 01-01-2001 4:59pm - Application now has a fully-functional express server, with GET and POST routes for the book resource. -->
+  
+4/25/2019 9:30am - Refactored code  
+4/25/2019 11:00am - Form to save info added  
+4/25/2019 11:45am - Basic styling  
+4/25/2019 12:00pm - Route to save book to database added  
+4/25/2019 1:00pm - Saving a book redirects to details view  
   
 ## Credits and Collaborations  
   
