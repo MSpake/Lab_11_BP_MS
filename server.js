@@ -33,6 +33,9 @@ app.get('/new_search', searchForm);
 //search results from API
 app.post('/searches', bookSearch);
 
+//when the user clicks add to library button, this saves the entry to the database
+app.post('/save_to_library', saveToLibrary);
+
 // below test renders page
 app.get('/test', (request, response) => {
   response.render('pages/index.ejs');
@@ -63,30 +66,30 @@ function Book(book) {
 // Helper Functions
 //===============================
 
-function handleError (error, response) {
-  response.render('pages/error.ejs', {status:500, message:'Something has gone wrong!'});
+function handleError(error, response) {
+  response.render('pages/error.ejs', { status: 500, message: 'Something has gone wrong!' });
   console.log(error);
 }
 
-function renderHomepage (request, response) {
+function renderHomepage(request, response) {
   client.query(SQL.getAll).then(result => {
     //first parameter indicates where content will be rendered, second parameter indicates retrived data from table.
     response.render('pages/index.ejs', { savedBooksArr: result.rows });
   }).catch(error => handleError(error, response));
 }
 
-function renderDetailView (request, response) {
+function renderDetailView(request, response) {
   const selected = parseInt(request.params.id);
   client.query(SQL.getById, [selected]).then(result => {
-    response.render('pages/books/detail.ejs', {showBook: result.rows[0]});
+    response.render('pages/books/detail.ejs', { showBook: result.rows[0] });
   })
 }
 
-function searchForm (request, response) {
+function searchForm(request, response) {
   response.render('pages/searches/new.ejs');
 }
 
-function bookSearch (request, response) {
+function bookSearch(request, response) {
   const query = request.body.search;
   console.log(query);
   const url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
@@ -101,6 +104,12 @@ function bookSearch (request, response) {
     response.render('pages/searches/show.ejs', { bookArray: bookArray });
     // response.send(bookArray);
   }).catch(error => handleError(error, response));
+}
+
+function saveToLibrary(request, response) {
+  const { title, author, description, isbn, image_url, bookshelf } = request.body;
+
+  // response.
 }
 
 //===============================
