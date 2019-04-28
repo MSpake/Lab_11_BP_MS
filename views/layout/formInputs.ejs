@@ -1,8 +1,23 @@
-<input type="hidden" name="title" value="<%= showBook.title %>">
-<input type="hidden" name="author" value="<%= showBook.author %>">
-<input type="hidden" name="description" value="<%= showBook.description %>">
-<input type="hidden" name="isbn" value="<%= showBook.isbn %>">
-<input type="hidden" name="image_url" value="<%= showBook.image_url %>">
-<input type="text" name="bookshelf" placeholder="Enter bookshelf name">
+<% console.log(route + 'from form') %>
 
-<input type="submit" value="add to library">
+    <form action="<%= route %>" method="POST" class="book-data">
+        <label class="hidden-on-save"> Title: 
+        <input type="text" name="title" value="<%= showBook.title %>" >
+    </label>
+        <label class="hidden-on-save"> Author: 
+        <input type="text" name="author" value="<%= showBook.author %>">
+    </label>
+        <label class="hidden-on-save"> Description: 
+        <input type="text" name="description" value="<%= showBook.description %>" >
+    </label>
+        <label class="hidden-on-save"> ISBN (do not recomend altering): 
+        <input type="text" name="isbn" value="<%= showBook.isbn %>">
+    </label>
+        <label class="hidden-on-save"> Image url: 
+        <input type="text" name="image_url" value="<%= showBook.image_url %>" >
+    </label>
+        <label>Bookshelf: 
+        <input type="text" name="bookshelf" placeholder="Enter bookshelf name" value="<%= showBook.bookshelf %>">
+    </label>
+        <input type="submit" name="submit" value="Submit" id="book-data-button">
+    </form>

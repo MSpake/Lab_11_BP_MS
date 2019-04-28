@@ -6,19 +6,24 @@
     <p>
         <%= showBook.author %>
     </p>
-    <% if (showBook.isbn) { %>
+    <% if (route) { %>
         <p>
             <%= showBook.description %>
         </p>
         <p>ISBN:
             <%= showBook.isbn %>
         </p>
-        <p>Bookshelf:
+        <p class="hidden-on-save">Bookshelf:
             <%= showBook.bookshelf %>
         </p>
+        <%- include('formInputs.ejs', {showBook, route})%>
+            <% if (route === '/update') { %>
+                <button id="update">Update Details</button>
 
-        <% } %>
-            <% if (!showBook.isbn) { %>
-                <a href="/books/<%=showBook.id%>"><button>View Details</button></a>
                 <% } %>
+
+                    <% } %>
+                        <% if (!route) { %>
+                            <a href="/books/<%=showBook.id%>"><button>View Details</button></a>
+                            <% } %>
 </section>

@@ -6,15 +6,10 @@
                 <%= savedBooksArr.length %> Saved Books</h4>
             <main>
                 <% savedBooksArr.forEach(showBook => { %>
-                    <% showBook = {
-                id: showBook.id,
-                title: showBook.title,
-                author: showBook.author,
-                image_url: showBook.image_url
-            } %>
-                        <%- include('../layout/book.ejs', {showBook}) %>
-                            <% }) %>
+                    <%- include('../layout/book.ejs', {showBook}) %>
+                        <% }) %>
             </main>
+
     </body>
 
     </html>

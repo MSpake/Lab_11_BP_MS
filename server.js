@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
+const methodOverride = require('method-override');
 
 const app = express();
 app.use(express.static('./public')); //for the purposes of our site, public is the root folder
@@ -35,6 +36,8 @@ app.post('/searches', bookSearch);
 
 //when the user clicks add to library button, this saves the entry to the database
 app.post('/save_to_library', saveToLibrary);
+
+app.put('/update', updateBookDetails);
 
 // below test renders page
 app.get('/test', (request, response) => {
@@ -77,14 +80,14 @@ function handleError(error, response) {
 function renderHomepage(request, response) {
   client.query(SQL.getAll).then(result => {
     //first parameter indicates where content will be rendered, second parameter indicates retrived data from table.
-    response.render('pages/index.ejs', { savedBooksArr: result.rows });
+    response.render('pages/index.ejs', { savedBooksArr: result.rows, route: null });
   }).catch(error => handleError(error, response));
 }
 
 function renderDetailView(request, response) {
   const selected = parseInt(request.params.id);
   client.query(SQL.getById, [selected]).then(result => {
-    response.render('pages/books/detail.ejs', { showBook: result.rows[0] });
+    response.render('pages/books/detail.ejs', { showBook: result.rows[0], route: '/update' });
   }).catch(error => handleError(error, response))
 }
 
@@ -104,7 +107,7 @@ function bookSearch(request, response) {
     const bookArray = bookResults.map(indBook => {
       return new Book(indBook);
     });
-    response.render('pages/searches/show.ejs', { bookArray: bookArray });
+    response.render('pages/searches/show.ejs', { bookArray: bookArray, route: '/save_to_library' });
     // response.send(bookArray);
   }).catch(error => handleError(error, response));
 }
@@ -118,6 +121,10 @@ function saveToLibrary(request, response) {
       response.redirect(`/books/${id}`);
     })
   }).catch(error => handleError(error, response));
+}
+
+function updateBookDetails(request, response) {
+  console.log('update route');
 }
 
 //===============================
