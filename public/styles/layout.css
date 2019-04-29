@@ -30,12 +30,18 @@ img {
     display: block;
 }
 
-form {
+fieldset {
     padding: 20px;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: flex-end;
+    text-align: right;
+    width: 30%;
+    margin: 10px auto;
 }
 
 input {
-    margin: 0 10px;
+    margin: 10px auto;
 }
 
 p,

@@ -5,6 +5,8 @@ let route = $('.book-data').attr('action');
 if (route === '/save_to_library') {
   $('.book-data').toggle();
   $('.hidden-on-save').toggle();
+  $('fieldset').css('align-content', 'center');
+  $('fieldset').css('text-align', 'center');
 }
 
 if (route.includes('books')) {
@@ -21,6 +23,8 @@ if (route.includes('books')) {
 
   $('#delete').on('click', event => {
     $('.book-data').toggle();
+    $('.book-data').css('width', '100%');
+    $('fieldset').css('text-align', 'center');
     $('#update').toggle();
     $('#delete').toggle();
     $('.hidden-on-delete').toggle();
