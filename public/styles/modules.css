@@ -1,3 +1,7 @@
+body {
+    font-family: 'EB Garamond', serif;
+}
+
 nav {
     background-color: rgb(49, 49, 49);
 }
@@ -38,4 +42,13 @@ section {
 img {
     padding: 5px;
     border: 5px solid rgb(167, 167, 167);
+}
+
+.book-data {
+    display: none;
+}
+
+fieldset {
+    border: 2px solid rgb(77, 77, 77);
+    border-radius: 10px;
 }
