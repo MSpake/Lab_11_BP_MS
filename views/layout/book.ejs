@@ -17,8 +17,9 @@
             <%= showBook.bookshelf %>
         </p>
         <%- include('formInputs.ejs', {showBook, route})%>
-            <% if (route === '/update') { %>
+            <% if (route.includes('books')) { %>
                 <button id="update">Update Details</button>
+                <button id="delete">Delete Book</button>
 
                 <% } %>
 

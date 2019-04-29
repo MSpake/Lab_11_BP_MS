@@ -1,22 +1,22 @@
 <form action="<%= route %>" method="POST" class="book-data">
-    <input type="hidden" name="_method" value="<%- route === '/update' ? 'put' : 'post' %>">
+    <input type="hidden" name="_method" value="post">
     <input type="hidden" name="id" value="<%= showBook.id %>">
-    <label class="hidden-on-save"> Title: 
+    <label class="hidden-on-save hidden-on-delete"> Title: 
         <input type="text" name="title" value="<%= showBook.title %>" >
     </label>
-    <label class="hidden-on-save"> Author: 
+    <label class="hidden-on-save hidden-on-delete"> Author: 
         <input type="text" name="author" value="<%= showBook.author %>">
     </label>
-    <label class="hidden-on-save"> Description: 
+    <label class="hidden-on-save hidden-on-delete"> Description: 
         <input type="text" name="description" value="<%= showBook.description %>" >
     </label>
-    <label class="hidden-on-save"> ISBN (do not recomend altering): 
+    <label class="hidden-on-save hidden-on-delete"> ISBN (do not recomend altering): 
         <input type="text" name="isbn" value="<%= showBook.isbn %>">
     </label>
-    <label class="hidden-on-save"> Image url: 
+    <label class="hidden-on-save hidden-on-delete"> Image url: 
         <input type="text" name="image_url" value="<%= showBook.image_url %>" >
     </label>
-    <label>Bookshelf: 
+    <label class="hidden-on-delete">Bookshelf: 
         <input type="text" name="bookshelf" placeholder="Enter bookshelf name" value="<%= showBook.bookshelf %>">
     </label>
     <input type="submit" name="submit" value="Submit" id="book-data-button">

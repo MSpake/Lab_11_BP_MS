@@ -38,6 +38,10 @@ app.get('/', renderHomepage);
 //renders detail view
 app.get('/books/:id', renderDetailView);
 
+app.put('/books/:id', updateBookDetails);
+
+app.delete('/books/:id', deleteBook);
+
 //render this form at this route
 app.get('/new_search', searchForm);
 
@@ -47,7 +51,8 @@ app.post('/searches', bookSearch);
 //when the user clicks add to library button, this saves the entry to the database
 app.post('/save_to_library', saveToLibrary);
 
-app.put('/update', updateBookDetails);
+
+
 
 // below test renders page
 app.get('/test', (request, response) => {
@@ -65,6 +70,7 @@ SQL.saveBookToDatabase = 'INSERT INTO saved_books (title, author, description, i
 //this command grabs the last single saved entry from the table
 SQL.getLast = 'SELECT * FROM saved_books ORDER BY id DESC LIMIT 1;';
 SQL.updateDetails = 'UPDATE saved_books SET title=$1, author=$2, description=$3, image_url=$4, isbn=$5, bookshelf=$6 WHERE id=$7';
+SQL.deleteBook = 'DELETE FROM saved_books WHERE id=$1;';
 
 //===============================
 // Constructor
@@ -98,7 +104,7 @@ function renderHomepage(request, response) {
 function renderDetailView(request, response) {
   const selected = parseInt(request.params.id);
   client.query(SQL.getById, [selected]).then(result => {
-    response.render('pages/books/detail.ejs', { showBook: result.rows[0], route: '/update' });
+    response.render('pages/books/detail.ejs', { showBook: result.rows[0], route: `/books/${selected}` });
   }).catch(error => handleError(error, response))
 }
 
@@ -135,12 +141,20 @@ function saveToLibrary(request, response) {
 }
 
 function updateBookDetails(request, response) {
-  const { title, author, description, image_url, isbn, bookshelf, id } = request.body;
+  const selected = parseInt(request.params.id);
+  const { title, author, description, image_url, isbn, bookshelf } = request.body;
 
-  client.query(SQL.updateDetails, [title, author, description, image_url, isbn, bookshelf, id]).then(result => {
+  client.query(SQL.updateDetails, [title, author, description, image_url, isbn, bookshelf, selected]).then(result => {
     response.redirect('/');
   })
 
+}
+
+function deleteBook(request, response) {
+  const selected = parseInt(request.params.id);
+  client.query(SQL.deleteBook, [selected]).then(result => {
+    response.redirect('/');
+  })
 }
 
 //===============================
