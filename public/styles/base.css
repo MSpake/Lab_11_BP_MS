@@ -3,7 +3,5 @@ body {
     background-color: rgb(134, 134, 136);
     margin: auto;
     text-align: center;
-    /* display: flex;
-    flex-flow: column wrap; */
     padding-top: 60px;
 }

@@ -8,7 +8,9 @@ if (route === '/save_to_library') {
 }
 
 if (route.includes('books')) {
-  //change hidden input _method value to put or delete
+  $('section').css('width', '90%');
+
+
   $('#update').on('click', event => {
     $('.book-data').toggle();
     $('#update').toggle();
